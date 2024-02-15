@@ -1,15 +1,10 @@
 import Character
 from Character import Weapon
 
+# Initialization of Character objects
+Hero = Character.Character("Hero",100,100,Weapon.Fists)
+Enemy = Character.Character("Enemy",100,100,Weapon.Fists)
+Hero.equip(Weapon.Mace)
 
-Fists = Weapon.Weapon("Fists",3)
-Mace = Weapon.Weapon("Mace",5)
-ShortBow = Weapon.Weapon("Short Bow",4)
-
-Hero = Character.Character("Hero",100,100,Fists)
-Enemy = Character.Character("Enemy",100,100,Fists)
-Hero.equip(Mace)
-
-while(True):
-    Hero.attack(Enemy)
-    
+while(Hero.attack(Enemy)==True):
+    break

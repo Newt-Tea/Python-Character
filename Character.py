@@ -5,6 +5,7 @@ import os
 import time
 
 class Character:
+
     weapon=Weapon.Fists
     alive = True
 
@@ -14,7 +15,7 @@ class Character:
         self.maxHealth=maxHealth
         self.dmg=weapon.dmg
 
-    def attack(self, target):
+    def attack(self, target) -> bool:
         while((target.alive==True) & (self.alive==True)):
             if(target.health > 0):
                 print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
@@ -28,7 +29,8 @@ class Character:
                 print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
                 target.alive = False
                 print(f"{target.name} was killed by {self.name}")
-                time.sleep(10)
+                time.sleep(3)
+                return False
 
     def equip(self,weapon):
         self.dmg=weapon.dmg

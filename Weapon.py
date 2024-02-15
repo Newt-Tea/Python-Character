@@ -6,6 +6,8 @@ class Weapon:
         self.speed=speed
         secs = speed*0.6
 
+
+# Creation of default objects
 Fists = Weapon("Fists",3,5)
 Mace = Weapon("Mace",5,3)
 ShortBow = Weapon("Short Bow",4,4)
