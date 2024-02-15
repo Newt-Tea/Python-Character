@@ -9,11 +9,11 @@ class Character:
     weapon=Weapon.Fists
     alive = True
 
-    def __init__(self,name:string,health:int,maxHealth:int,weapon:Weapon): 
+    def __init__(self,name:string,health:int,maxHealth:int,): 
         self.name=name
         self.health=health
         self.maxHealth=maxHealth
-        self.dmg=weapon.dmg
+        self.dmg=self.weapon.dmg
 
     def attack(self, target) -> None:
         while((target.alive==True) & (self.alive==True)):
@@ -44,3 +44,6 @@ class Character:
     def healthBar(self,target):
         while((self.alive==True) & (target.alive == True)):
             print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
+
+# Init of default Characters
+Hero = Character
