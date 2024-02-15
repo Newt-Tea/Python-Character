@@ -17,12 +17,17 @@ class Character:
 
     def attack(self, target) -> bool:
         while((target.alive==True) & (self.alive==True)):
+
             if(target.health > 0):
+
                 print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
+                
                 target.health-=self.dmg
                 print (f"{self.name} attacks {target.name} for {self.dmg} health")
+
                 self.health-=target.dmg
                 print (f"{target.name} attacks {self.name} for {target.dmg} health")
+
                 time.sleep(0.4)
                 os.system('cls')
             else:
