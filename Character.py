@@ -1,52 +1,48 @@
-
 import string
 import Weapon
 import os
-import time
+from health_bar import HealthBar
 
 class Character:
-
-    weapon=Weapon.Fists
-    alive = True
-
-    def __init__(self,name:string,health:int,maxHealth:int,): 
+    alive: bool = True
+    def __init__(self,name:string,health:int,maxHealth:int = 100, weapon:Weapon = Weapon.Fists): 
         self.name=name
         self.health=health
         self.maxHealth=maxHealth
+        self.weapon = weapon
         self.dmg=self.weapon.dmg
-
+        
     def attack(self, target) -> None:
-        while((target.alive==True) & (self.alive==True)):
-            x=0
-            while (x!=10):
-                if(target.health > 0):
+        if (target.health >= self.dmg) & (self.health > 0):
+            target.health -= self.dmg
+            target.health = max(target.health, 0)
+            target.health_bar.update()
+            print(f"{self.name} dealt {self.dmg} damage to {target.name} with {self.weapon.name}")
+        elif target.health <= self.dmg:
+            target.alive = False
+        else:
+            self.alive = False
 
-                    print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
+class Hero(Character):
+    def __init__(self,name,health) -> None:
+        super().__init__(name=name,health=health)
 
-                    target.health-=self.dmg
-                    print (f"{self.name} attacks {target.name} for {self.dmg} health")
-
-                    self.health-=target.dmg
-                    print (f"{target.name} attacks {self.name} for {target.dmg} health")
-
-                    time.sleep(0.4)
-                    os.system('cls')
-                else:
-                    print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
-                    target.alive = False
-                    print(f"{target.name} was killed by {self.name}")
-                    time.sleep(3)
-                x+=1
+        self.default_weapon = self.weapon
+        self.health_bar = HealthBar(self, color = "green")
 
     def equip(self,weapon):
-        self.dmg=weapon.dmg
         self.weapon=weapon
-        print(f"{self.name} equiped {weapon.name}")
-    
-    def healthBar(self,target):
-        while((self.alive==True) & (target.alive == True)):
-            print(f"You: {self.health}/{self.maxHealth} Enemy: {target.health}/{target.maxHealth}")
+        self.dmg=weapon.dmg
+        print(f"{self.name} equiped a(n) {weapon.name}")
+
+    def drop(self) -> None:
+        print(f"{self.name} dropped their {self.weapon.name}!")
+        self.weapon = self.defaultWeapon
+
+class Enemy(Character):
+    def __init__(self,name,health) -> None:
+        super().__init__(name=name,health=health)
+
+        self.health_bar = HealthBar(self, color = "red")
 
 # Init of default Characters
-Hero = Character("Hero",100,100)
-Enemy = Character("Enemy",100,100)
