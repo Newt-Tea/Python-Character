@@ -1,10 +1,36 @@
 import string
 class Weapon:
-    def __init__(self,name:string,dmg:int,speed:int):
+    """
+    A class to create weapon objects for characters
+    
+    ...
+    
+    Attributes
+    ----------
+    name : str
+        The name of the weapon
+    dmg : str
+        The amount of damage the weapon does
+    speed : int (currently not in use)
+        How often the weapon attacks
+    """
+    
+    def __init__(self,name:string,dmg:int,speed:int) -> None:
+        """
+        Parameters
+        ----------
+        name : str
+            The name of the weapon
+        dmg : int
+            The amount of damage the weapon does
+        speed : int
+            How often the weapon attacks
+        """
+        
         self.name=name
         self.dmg=dmg
-        self.speed=speed
-        secs = speed*0.6
+        #self.speed=speed
+        #secs = speed*0.6
 
 
 # Creation of default objects

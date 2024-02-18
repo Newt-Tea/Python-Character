@@ -7,6 +7,7 @@ hero = Hero("Hero",100)
 enemy = Enemy("Enemy",100)
 hero.equip(Weapon.Mace)
 def run() -> None :
+    """Runs the battle sim"""
     while (hero.alive & enemy.alive) == True:
         os.system("cls")
         hero.attack(enemy)
@@ -19,5 +20,6 @@ def run() -> None :
             print(f"{hero.name} killed {enemy.name} with {hero.weapon.name}")
     else:
          print(f"{hero.name} killed {enemy.name} with {hero.weapon.name}")
+run.__doc__ = "Runs the battle sim"
 
 run()
